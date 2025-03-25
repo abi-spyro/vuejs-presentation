@@ -1,0 +1,26 @@
+.row {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    justify-content: center;
+
+}
+.tagline {
+    font-size: 76px;
+    line-height: 1.25;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.accent {
+    background: -webkit-linear-gradient(315deg,#42d392 25%,#647eff);
+    background-clip: border-box;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.reveal table.center td, .reveal table.center th {
+    text-align: center;
+}

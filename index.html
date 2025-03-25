@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+	<head>
+        <base href="./" />
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Vue.js presentation</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/vue.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/vs2015.css">
+		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h2>Dlaczego (nie) warto nauczyć się <span class="accent" >Vue.js</span></h2>
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/170px-Vue.js_Logo_2.svg.png" alt="vue_logo">
+				</section>
+				<section>
+					<h4 class="row">Za każdym popularnym narzędziem stoi potężny motywator...</h4>
+					<div class="fragment row">
+						<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Angular_Logo_SVG.svg/200px-Angular_Logo_SVG.svg.png" alt="angular">
+						Google
+					</div>
+					<div class="fragment row">
+						<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/React_Logo_SVG.svg/100px-React_Logo_SVG.svg.png" alt="react">
+						Meta (Faceboook)
+					</div>
+					<div class="fragment row">
+						<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/170px-Vue.js_Logo_2.svg.png" alt="vue">
+						Typ, który musiał pracować z AngularJS
+					</div>
+				</section>
+				<section>
+					<section>
+						<div>
+							<img src="https://images.ctfassets.net/s5uo95nf6njh/5PpFIeuDxz2T89nZNED1EP/48d62a69f31a3ab6dfc58938eb7b8c2a/evan-you-portrait.jpg?w=600&fm=avif" alt="evanyou" height="150">
+							<div>Twórca: <span class="accent">Evan You</span></div>
+						</div>
+						<p class="fragment">Pierwszy release: luty 2014</p>
+						<div class="fragment">
+                            Obecna wersja: <span class="accent">3.5</span> (Tengen Toppa Gurren Lagann)
+						</div>
+						<img class="fragment" src="https://c.tenor.com/N8lUu7e6_kAAAAAC/tenor.gif" alt="ttgl">
+					</section>
+					<section>
+						<img src="assets/vueversions.jpg" alt="vueversions" width="600">
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2 class="tagline"> The <span class="accent" >Progressive</span><br >JavaScript Framework </h2>
+					</section>
+					<section>
+						<ul>
+							<li><span class="accent">Strony statyczne</span> (w runtime)</li>
+							<li class="fragment">Single-Page Application <span class="accent" >(SPA)</span></li>
+							<li class="fragment">Server-Side Rendering <span class="accent" >(SSR)</span></li>
+							<li class="fragment">Static Site Generation <span class="accent" >(SSG)</span></li>
+							<li class="fragment"><span class="accent" >Web Components</span></li>
+							<li class="fragment">A także...</li>
+						</ul>
+					</section>
+					<section>
+						  <pre><code style="max-height: none" data-line-numbers="3|13">import { createRenderer } from '@vue/runtime-core'
+
+const { render, createApp } = createRenderer({
+  patchProp,
+  insert,
+  remove,
+  createElement
+  // ...
+})
+
+// `render` is the low-level API
+// `createApp` returns an app instance
+export { render, createApp }
+
+// re-export Vue core APIs
+export * from '@vue/runtime-core'
+						  </code></pre>
+					</section>
+					<section>
+						<p>Vue TermUI</p>
+						<img src="https://vue-termui.dev/quick-start-demo.png" alt="termui">
+					</section>
+					<section>
+						<p>TresJS</p>
+						<div class="row">
+							<pre><code data-trim>
+<script setup="true">
+import { TresCanvas } from '@tresjs/core'
+</script>
+&lt;template&gt;
+  &lt;TresCanvas clear-color=&rdquo;#82DBC5&rdquo; window-size&gt;
+    &lt;TresPerspectiveCamera /&gt;
+    &lt;TresMesh @click=&rdquo;onClick&rdquo;&gt;
+      &lt;TresBoxGeometry :args=&quot;[1, 1, 1]&quot; /&gt;
+      &lt;TresMeshNormalMaterial /&gt;
+    &lt;/TresMesh&gt;
+  &lt;/TresCanvas&gt;
+&lt;/template&gt;
+							</code></pre>
+							<img src="assets/tresjs.jpg" alt="tresjs">
+						</div>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Rozszerzenie statycznego HTMLa</h3>
+                        <img src="assets/memes/static.webp" alt="static-meme" width="300" />
+					</section>
+					<section>
+						<h4>Vue w akcji - przykład 1</h4>
+						<div class="row">
+							<pre><code style="max-height: none" data-line-numbers="1|2|10-16">&lt;script src=&quot;https://unpkg.com/vue@3/dist/vue.global.js&quot;&gt;&lt;/script&gt;
+&lt;div id=&quot;app&quot;&gt;
+	&lt;div&gt;{{ message }}&lt;/div&gt;
+	&lt;input v-model=&quot;message&quot; /&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  const { createApp } = Vue
+
+  createApp({
+    data() {
+      return {
+        message: 'Hello Vue!'
+      }
+    }
+  }).mount('#app')
+&lt;/script&gt;</code></pre>
+							<div style="min-width: 400px">
+								<div id="app1">
+									<div>{{ message }}</div>
+									<input v-model="message" />
+
+								</div>
+
+								<script>
+									const { createApp: createApp1, ref: ref1 } = Vue
+
+									createApp1({
+										setup() {
+											const message = ref1('Hello vue!')
+											return {
+												message
+											}
+										}
+									}).mount('#app1')
+								</script>
+							</div>
+						</div>
+					</section>
+				</section>
+				<section>
+					<section>
+                        <h3>Single-Page Application (SPA)</h3>
+                        <img src="assets/memes/spa.webp" alt="spa-meme" width="300" />
+                    </section>
+					<section>
+						<h4>Możliwości Vue</h4>
+						<ul>
+							<li class="fragment">Text interpolation: <span class="accent" ><code>{{ variable }}</code></span></li>
+							<li class="fragment">JS expressions: <br><span class="accent" ><code>{{ message.split('').reverse().join('') }}</code></span></li>
+							<li class="fragment">Attribute binding <span class="accent" ><code>v-bind:href / :href</code></span></li>
+							<li class="fragment">Event binding <span class="accent" ><code>v-on:click / @click</code></span></li>
+							<li class="fragment">Conditional rendering <span class="accent" ><code>v-if / v-else</code></span></li>
+							<li class="fragment">List rendering <span class="accent" ><code>v-for</code></span></li>
+							<li class="fragment">Two-way data binding <span class="accent" ><code>v-model</code></span></li>
+						</ul>
+					</section>
+					<section>
+						<h4>Komponenty: <span class="accent">Options API</span> vs <span class="accent">Composition API</span></h4>
+
+						<div class="row">
+							<pre><code style="max-height: none">&lt;script&gt;
+export default {
+  data() {
+    return {
+      count: 0
+    }
+  }
+}
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;button @click=&quot;count++&quot;&gt;
+		You clicked me {{ count }} times.
+	&lt;/button&gt;
+&lt;/template&gt;</code></pre>
+							<pre><code style="max-height: none">&lt;script setup&gt;
+import { ref } from 'vue'
+
+const count = ref(0)
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;button @click=&quot;count++&quot;&gt;
+		You clicked me {{ count }} times.
+	&lt;/button&gt;
+&lt;/template&gt;</code></pre>
+						</div>
+					</section>
+					<section>
+						<h4>Vue w akcji - przykład 2</h4>
+						<div class="row">
+							<pre><code style="max-height: none" data-line-numbers="3-4|14,19|5-8|15-16" >&lt;script setup&gt;
+import { ref } from 'vue'
+const msg = ref('');
+const msgs = ref(['Hello!']);
+const submit = () =&gt; {
+  msgs.value = [...msgs.value, msg.value];
+  msg.value ='';
+}
+const isEven = (i) =&gt; i%2 === 0;
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;div style=&quot;height: 400px;...&quot;&gt;
+    &lt;div v-for=&quot;(m, i) in msgs&quot; :key=&quot;i&quot; :style=&quot;{'align-self': isEven(i) ? 'start' : 'end'}&quot;&gt;
+      &lt;span v-if=&quot;isEven(i)&quot;&gt;- {{m}}&lt;/span&gt;
+      &lt;span v-else&gt;{{m}} -&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;input v-model=&quot;msg&quot; @keyup.enter=&quot;submit&quot; /&gt;
+&lt;/template&gt;</code></pre>
+							<div>
+								<div id="app2">
+									<div style="height: 400px; width: 200px; display: flex; overflow-y: auto; justify-content: flex-end; flex-direction: column; font-size: 16px">
+										<div v-for="(m, i) in msgs" :style="{'align-self': isEven(i) ? 'start' : 'end'}" :key="i">
+											<span v-if="isEven(i)">- {{m}}</span>
+											<span v-else>{{m}} -</span>
+										</div>
+									</div>
+									<input v-model="msg" @keyup.enter="submit" />
+								</div>
+								<script>
+									const { createApp: createApp2, ref: ref2 } = Vue
+
+									createApp2({
+										setup() {
+											const msg = ref2('');
+											const msgs = ref2(['Hello!']);
+											const submit = () => {
+												msgs.value = [...msgs.value, msg.value];
+												msg.value ='';
+											}
+											const isEven = (i) => i%2 === 0;
+											return {
+												msg, msgs, submit, isEven
+											}
+										}
+									}).mount('#app2')
+								</script>
+							</div>
+						</div>
+					</section>
+                    <section>
+                        <h4>Composables</h4>
+                        <pre><code style="max-height: none; font-size: 16px; line-height: 1.2em" >// mouse.js
+import { ref, onMounted, onUnmounted } from 'vue'
+
+// by convention, composable function names start with "use"
+export function useMouse() {
+  // state encapsulated and managed by the composable
+  const x = ref(0)
+  const y = ref(0)
+
+  // a composable can update its managed state over time.
+  function update(event) {
+    x.value = event.pageX
+    y.value = event.pageY
+  }
+
+  // a composable can also hook into its owner component's
+  // lifecycle to setup and teardown side effects.
+  onMounted(() => window.addEventListener('mousemove', update))
+  onUnmounted(() => window.removeEventListener('mousemove', update))
+
+  // expose managed state as return value
+  return { x, y }
+}</code></pre>
+                        <pre><code style="max-height: none; font-size: 16px; line-height: 1.2em" >&lt;script setup&gt;
+import { useMouse } from &#39;./mouse.js&#39;
+
+const { x, y } = useMouse()
+&lt;/script&gt;
+
+&lt;template&gt;Mouse position is at: {{ x }}, {{ y }}&lt;/template&gt;</code></pre>
+                    </section>
+                    <section>
+                        <h4>State management - Pinia</h4>
+                        <pre><code style="max-height: none; font-size: 16px; line-height: 1.2em" >export const useCounterStore = defineStore('counter', () => {
+  const count = ref(0)
+  const name = ref('Eduardo')
+  const doubleCount = computed(() => count.value * 2)
+  function increment() {
+    count.value++
+  }
+
+  return { count, name, doubleCount, increment }
+})</code></pre>
+                        <pre><code style="max-height: none; font-size: 16px; line-height: 1.2em" >&lt;script setup&gt;
+import { useCounterStore } from &#39;@/stores/counter&#39;
+
+// access the `store` variable anywhere in the component ✨
+const store = useCounterStore()
+&lt;/script&gt;</code></pre>
+                    </section>
+				</section>
+				<section>
+						<section>
+                            <h3>Server-Side Rendering (SSR)</h3>
+                            <img src="assets/memes/ssr.png" alt="ssr-meme" width="300" />
+                        </section>
+						<section>
+                            <h4>Vue w akcji - przykład 3</h4>
+							<div class="row">
+							<pre><code style="max-height: none; font-size: 16px; line-height: 1.2em" >import express from 'express'
+import { createSSRApp } from 'vue'
+import { renderToString } from 'vue/server-renderer'
+
+const server = express()
+
+server.get('/', (req, res) =&gt; {
+    const app = createSSRApp({
+        data: () =&gt; ({ msg: 'Hello Krak&oacute;w' }),
+        template: `&lt;div&gt;SSR message: {{msg}}&lt;/div&gt;`
+    })
+
+    renderToString(app).then((html) =&gt; {
+        res.send(`
+    &lt;!DOCTYPE html&gt;
+    &lt;html&gt;
+      &lt;head&gt;
+        &lt;title&gt;Vue SSR Example&lt;/title&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;div id=&quot;app&quot;&gt;${html}&lt;/div&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+    `)
+    })
+})</code></pre>
+								<div>
+
+                                    <iframe data-src="http://localhost:3000"></iframe>
+								</div>
+							</div>
+						</section>
+                    <section>
+                        <h4>Nuxt.js</h4>
+                        <img src="assets/nuxt.png" alt="nuxt">
+                    </section>
+                </section>
+				<section>
+					<section>
+                        <h3>Static Site Generation (SSG)</h3>
+                        <img src="assets/memes/ssg.jpg" alt="ssg-meme" width="300" />
+					</section>
+                    <section>
+                        <img src="assets/jamstack.svg" alt="jamstack" />
+                    </section>
+                    <section>
+                        <img src="assets/jamstack-build-process.webp" alt="jamstack-build-process" />
+                        <div>
+                            <a href="https://www.zesty.io/mindshare/headless/what-is-jamstack/">Zesty: What is Jamstack?</a></div>
+                    </section>
+                    <section>
+                        <img src="assets/vue-ssg.png" alt="vue-ssg" width="300" />
+                        <div>
+                            <a href="https://jamstack.org/">Jamstack website</a></div>
+                    </section>
+                    <section>
+                        <h4>VitePress</h4>
+                        <img src="assets/vitepress.png" alt="vitepress">
+                    </section>
+				</section>
+				<section>
+					<section>
+						<h3>WebComponents</h3>
+                        <img src="assets/memes/wc.webp" alt="wc-meme" width="300" />
+					</section>
+
+                    <section>
+                        <h4>Vue w akcji - przykład 4</h4>
+                        <div class="row">
+                            <div style="width: 150%">
+							<pre><code style="max-height: none; font-size: 16px; line-height: 1.2em" >const { defineCustomElement } = Vue
+const MyVueElement = defineCustomElement({
+    // normal Vue component options here
+    props: {
+        text: String,
+    },
+    emits: {},
+    template: `&lt;div&gt;Input text: {{text}}&lt;/div&gt;`,
+
+    styles: []
+})
+customElements.define(&#39;my-vue-element&#39;, MyVueElement)</code></pre>
+
+                            <pre><code class="language-html" style="max-height: none; font-size: 16px; line-height: 1.2em" >&lt;my-vue-element text=&quot;custom element text&quot; /&gt;</code></pre>
+                            </div>
+                                <div>
+                                <script>
+                                    const { defineCustomElement } = Vue
+
+                                    const MyVueElement = defineCustomElement({
+                                        // normal Vue component options here
+                                        props: {
+                                            text: String,
+                                        },
+                                        emits: {},
+                                        template: `<div>Input text: {{text}}</div>`,
+
+                                        styles: []
+                                    })
+                                    customElements.define('my-vue-element', MyVueElement)
+                                </script>
+                                <my-vue-element text="custom element text" />
+                            </div>
+                        </div>
+                    </section>
+				</section>
+				<section>
+					<section>
+						<h3>Porównanie</h3>
+                    </section>
+					<section>
+                        <h4>Skalowanie</h4>
+                        <table class="center"><thead>
+                        <tr>
+                            <th></th>
+                            <th>W górę</th>
+                            <th>W dół</th>
+                        </tr></thead>
+                            <tbody>
+                            <tr>
+                                <td>Angular</td>
+                                <td>✓</td>
+                                <td>✗</td>
+                            </tr>
+                            <tr>
+                                <td>React</td>
+                                <td>✓*</td>
+                                <td>✗</td>
+                            </tr>
+                            <tr class="accent">
+                                <td>Vue</td>
+                                <td>✓*</td>
+                                <td>✓</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    <p style="font-size: 0.5em">* przy użyciu dodatkowych narzędzi</p>
+                    </section>
+                    <section>
+                        <h4>Benchmarki</h4>
+                        <div class="row">
+                            <img src="assets/benchmark1.jpg" alt="benchmark1" width="300">
+                            <img src="assets/benchmark2.jpg" alt="benchmark1" width="300">
+                        </div>
+                        <a href="https://krausest.github.io/js-framework-benchmark/2025/table_chrome_132.0.6834.83.html" target="_blank">Link do benchmarku</a>
+                    </section>
+					<section>
+                        <h4>W kodzie</h4>
+						<div class="row">
+							<pre style="width: 40%"><code data-line-numbers style="max-height: 600px; font-size: 12px; line-height: 1.2em">&lt;script setup&gt;
+import { ref } from 'vue'
+const msg = ref('');
+const msgs = ref(['Hello!']);
+const submit = () =&gt; {
+  msgs.value = [...msgs.value, msg.value];
+  msg.value ='';
+}
+const isEven = (i) =&gt; i%2 === 0;
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;div style=&quot;height: 400px; ...&quot;&gt;
+    &lt;div v-for=&quot;(m, i) in msgs&quot; :style=&quot;{'align-self': isEven(i) ? 'start' : 'end'}&quot; :key=&quot;i&quot;&gt;
+      &lt;span v-if=&quot;isEven(i)&quot;&gt;- {{m}}&lt;/span&gt;
+      &lt;span v-else&gt;{{m}} -&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;input v-model=&quot;msg&quot; @keyup.enter=&quot;submit&quot; /&gt;
+&lt;/template&gt;</code></pre>
+							<pre style="width: 40%"><code data-line-numbers style="max-height: 600px; font-size: 12px; line-height: 1.2em">import React, { useRef, useState } from 'react'
+
+const App = () =&gt; {
+  const [msg, setMsg] = useState('')
+  const [msgs, setMsgs] = useState(['Hello!'])
+  const submit = () =&gt; {
+    setMsgs(initialMsgs =&gt; [...initialMsgs, msg]);
+    setMsg('');
+  }
+  const isEven = i =&gt; i%2 === 0;
+
+  return (
+    &lt;&gt;
+    &lt;div style={{height: 400, ...}}&gt;
+      {msgs.map((m, i) =&gt; (
+      &lt;div key={i} style={{alignSelf: isEven(i) ? 'start' : 'end'}}&gt;
+        {isEven(i) ? (&lt;span&gt;- {m}&lt;/span&gt;) : (&lt;span&gt;{m} -&lt;/span&gt;)}
+      &lt;/div&gt;
+    ))}
+    &lt;/div&gt;
+      &lt;input value={msg} onChange={e =&gt; setMsg(e.target.value)} onKeyUp={event =&gt; {
+                if (event.key === 'Enter') {
+                   submit();
+                }
+              }} /&gt;
+    &lt;/&gt;
+  )
+}
+
+export default App</code></pre>
+							<pre style="width: 40%"><code data-line-numbers style="max-height: 600px; font-size: 12px; line-height: 1.2em">import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { bootstrapApplication } from '@angular/platform-browser';
+
+@Component({
+  imports: [CommonModule, FormsModule],
+  selector: 'app-root',
+  template: `
+    &lt;div style=&quot;height: 400px; ...&quot;&gt;
+    @for (m of msgs; track $index) {
+      &lt;div [ngStyle]=&quot;{ 'align-self': isEven($index) ? 'start' : 'end'}&quot;&gt;
+      @if (isEven($index)) {
+        &lt;span&gt;- {{ m }}&lt;/span&gt;
+      } @else {
+        &lt;span&gt;{{ m }} -&lt;/span&gt;
+      }
+      &lt;/div&gt;
+    }
+    &lt;/div&gt;
+    &lt;input [(ngModel)]=&quot;msg&quot; (keyup.enter)=&quot;submit()&quot; /&gt;
+  `,
+})
+export class ChatComponent {
+  msg: string = '';
+  msgs: string[] = ['Hello!'];
+  submit() {
+    this.msgs.push(this.msg);
+    this.msg = '';
+  }
+  isEven(i: number): boolean {
+    return i % 2 === 0;
+  }
+}
+
+bootstrapApplication(ChatComponent);
+</code></pre>
+						</div>
+					</section>
+                    <section>
+                        <h4>Vue vs React</h4>
+                        <div class="r-stack">
+                            <img src="assets/vuereact.jpg" alt="vuereact">
+                            <img class="fragment" src="assets/vuereact2.jpg" alt="vuereact2">
+                            <img class="fragment" src="assets/vuereact3.jpg" alt="vuereact3">
+                        </div>
+                    </section>
+                    <section>
+                        <h4>Vue vs Angular</h4>
+                        <div class="r-stack">
+                            <img src="assets/vueangular.jpg" alt="vueangular">
+                            <img class="fragment" src="assets/vueangular2.jpg" alt="vueangular2">
+                            <img class="fragment" src="assets/vueangular3.jpg" alt="vueangular3">
+                        </div>
+                    </section>
+				</section>
+				<section>
+					<section>
+						<h2>Czy warto?</h2>
+					</section>
+					<section>
+						<h4>
+							Do szybkiego prototypingu
+						</h4>
+						<p class="codepen" data-height="300" data-default-tab="result" data-slug-hash="LEPKgEb" data-pen-title="Drag'n drop points vue" data-user="abi-spyro" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/abi-spyro/pen/LEPKgEb">
+  Drag'n drop points vue</a> by abi-spyro (<a href="https://codepen.io/abi-spyro">@abi-spyro</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+						</p>
+						<script async src="https://public.codepenassets.com/embed/index.js"></script>
+					</section>
+					<section>
+						<ul>
+							<li>Jako pierwszy framework</li>
+							<li class="fragment">Do tworzenia bibliotek WebComponents</li>
+							<li class="fragment">Jeśli chcesz małym kosztem rozszerzać statyczne strony dynamicznie generowanymi elementami (petite-vue ma 6kb)</li>
+							<li class="fragment">Jeśli lubisz patrzeć na benchmarki</li>
+							<li class="fragment">Jeśli chcesz rozszerzyć swoje portfolio</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<h2>Kiedy nie warto?</h2>
+					<ul>
+						<li>Gdy nie masz do tego ludzi</li>
+						<li class="fragment">Gdy inne aplikacje są w innych frameworkach</li>
+						<li class="fragment">Gdy nie istnieje <b class="accent">techniczna i biznesowa potrzeba</b> pisania w Vue</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Dziękuję!</h2>
+					<img src="https://preview.redd.it/ruewqw4fpml91.png?width=1080&crop=smart&auto=webp&s=e40ecf7e3e3a26744c62bc0e63f25994344b31e3" width="500" alt="meme">
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
