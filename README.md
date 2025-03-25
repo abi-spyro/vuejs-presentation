@@ -1,4 +1,4 @@
-# This is a presentation created using reveal.js
+# This is a presentation created with reveal.js
 
 
 <p align="center">
